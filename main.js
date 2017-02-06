@@ -20,6 +20,19 @@ class ProductComponent {
         return container;
     }
 }
+
+
+function renderProduct(parentEl) {
+    return (product) => {
+        const component = new ProductComponent(product);
+        parentEl.appendChild(component.render());
+    }
+}
+
+const promotedProductsList = document.querySelector('#promoted');
+const regularProductsList = document.querySelector('#regular');
+
+
 const products = [
     {
         name: 'VanillaJS',
@@ -34,12 +47,11 @@ const products = [
     {
         name: 'Angular2',
         description: 'One framework. Mobile & desktop.',
-        price: 256
+        price: 256,
+        promoted: true
     }
 ];
 
-products.forEach(product => {
-    const component = new ProductComponent(product);
-    document.body.appendChild(component.render());
-});
+products.filter(product => product.promoted).forEach(renderProduct(promotedProductsList));
+products.filter(product => !product.promoted).forEach(renderProduct(regularProductsList));
 
