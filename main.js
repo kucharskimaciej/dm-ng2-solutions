@@ -4,34 +4,39 @@ class ProductComponent {
     }
 
     render() {
-        const container = document.createElement('div');
-        const name = document.createElement('h3');
-        const description = document.createElement('p');
-        const price = document.createElement('span');
-
-        name.textContent = this.product.name;
-        description.textContent = this.product.description;
-        price.textContent = `$${this.product.price}`;
-
-        container.appendChild(name);
-        container.appendChild(description);
-        container.appendChild(price);
-
-        return container;
+        return el('div',
+            el('h3', this.product.name),
+            el('p', this.product.description),
+            el('span', `$${this.product.price}`)
+        );
     }
 }
 
+class AppComponent {
+    constructor(products) {
+        this.products = products;
+    }
 
-function renderProduct(parentEl) {
-    return (product) => {
-        const component = new ProductComponent(product);
-        parentEl.appendChild(component.render());
+    render() {
+        return el('section',
+            el('div',
+                el('h2', 'Promoted'),
+                ...this.products.filter(product => product.promoted)
+                    .map(this.renderProduct)
+            ),
+            el('div',
+                el('h2', 'Regular'),
+                ...this.products.filter(product => !product.promoted)
+                    .map(this.renderProduct)
+            )
+        );
+    }
+
+    renderProduct(product) {
+        const cmp = new ProductComponent(product);
+        return cmp.render();
     }
 }
-
-const promotedProductsList = document.querySelector('#promoted');
-const regularProductsList = document.querySelector('#regular');
-
 
 const products = [
     {
@@ -52,6 +57,26 @@ const products = [
     }
 ];
 
-products.filter(product => product.promoted).forEach(renderProduct(promotedProductsList));
-products.filter(product => !product.promoted).forEach(renderProduct(regularProductsList));
+const app = new AppComponent(products);
+document.body.appendChild(createElement(app.render()));
 
+
+
+//***
+
+function el(tagName, ...children) {
+    return { tagName, children };
+}
+
+function createElement(node) {
+    if (typeof node === 'string') {
+        return document.createTextNode(node);
+    }
+
+    const el = document.createElement(node.tagName);
+    node.children
+        .map(createElement)
+        .forEach(child => el.appendChild(child));
+
+    return el;
+}
