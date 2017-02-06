@@ -20,10 +20,26 @@ class ProductComponent {
         return container;
     }
 }
-const product = {
-    name: 'VanillaJS',
-    description: 'Best framework ever',
-    price: 0
-};
-const component = new ProductComponent(product);
-document.body.appendChild(component.render());
+const products = [
+    {
+        name: 'VanillaJS',
+        description: 'Best framework ever',
+        price: 0
+    },
+    {
+        name: 'TypeScript',
+        description: 'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.',
+        price: 128
+    },
+    {
+        name: 'Angular2',
+        description: 'One framework. Mobile & desktop.',
+        price: 256
+    }
+];
+
+products.forEach(product => {
+    const component = new ProductComponent(product);
+    document.body.appendChild(component.render());
+});
+
