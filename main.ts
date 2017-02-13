@@ -1,9 +1,7 @@
 class ProductComponent {
-    constructor(product) {
-        this.product = product;
-    }
+    constructor(private product: IProduct) {}
 
-    render() {
+    render(): CustomElement {
         return el('div',
             el('h3', this.product.name),
             el('p', this.product.description),
@@ -13,11 +11,9 @@ class ProductComponent {
 }
 
 class AppComponent {
-    constructor(products) {
-        this.products = products;
-    }
+    constructor(private products: IProduct[]) {}
 
-    render() {
+    render(): CustomElement {
         return el('section',
             el('div',
                 el('h2', 'Promoted'),
@@ -32,13 +28,19 @@ class AppComponent {
         );
     }
 
-    renderProduct(product) {
+    renderProduct(product: IProduct): CustomElement {
         const cmp = new ProductComponent(product);
         return cmp.render();
     }
 }
+interface IProduct {
+    name: string;
+    description: string;
+    price: number;
+    promoted?: boolean;
+}
 
-const products = [
+const products: IProduct[] = [
     {
         name: 'VanillaJS',
         description: 'Best framework ever',
@@ -63,12 +65,13 @@ document.body.appendChild(createElement(app.render()));
 
 
 //***
+type CustomElement = string | { tagName: string, children: CustomElement[] };
 
-function el(tagName, ...children) {
+function el(tagName: string, ...children: CustomElement[]): CustomElement {
     return { tagName, children };
 }
 
-function createElement(node) {
+function createElement(node: CustomElement): HTMLElement | Text {
     if (typeof node === 'string') {
         return document.createTextNode(node);
     }
