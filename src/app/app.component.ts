@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {IProduct} from "./models/product";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Hello Angular!';
 
-  products = [
+  private products: IProduct[] = [
     {
       name: "JavaScript: The Definitive Guide",
       description: `Since 1996, JavaScript: The Definitive Guide has been the bible for JavaScript programmers—a programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers.`,
@@ -22,7 +23,11 @@ export class AppComponent {
     {
       name: "JavaScript: The Good Parts: The Good Parts",
       description: `Most programming languages contain good and bad parts, but JavaScript has more than its share of the bad, having been developed and released in a hurry before it could be refined. This authoritative book scrapes away these bad features to reveal a subset of JavaScript that's more reliable, readable, and maintainable than the language as a whole—a subset you can use to create truly extensible and efficient code.`,
-      price: 16.59
+      price: 16.59,
+      promoted: true
     }
   ];
+
+  promotedProducts: IProduct[] = this.products.filter(p => p.promoted);
+  regularProducts: IProduct[] = this.products.filter(p => !p.promoted);
 }

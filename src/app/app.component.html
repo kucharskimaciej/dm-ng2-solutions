@@ -3,8 +3,22 @@
     {{title}}
   </h1>
 
+  <h2>Promoted items</h2>
   <div class="list-group">
-    <div class="list-group-item" *ngFor="let product of products">
+    <div class="list-group-item" *ngFor="let product of promotedProducts">
+      <h4 class="list-group-item-heading">
+        {{ product.name }}
+
+        <span class="label label-default">${{ product.price }}</span>
+      </h4>
+
+      <p class="list-group-item-text">{{ product.description }}</p>
+    </div>
+  </div>
+
+  <h2>Regular items</h2>
+  <div class="list-group">
+    <div class="list-group-item" *ngFor="let product of regularProducts">
       <h4 class="list-group-item-heading">
         {{ product.name }}
 
