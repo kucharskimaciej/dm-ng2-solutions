@@ -1,3 +1,17 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <h1>
+    {{title}}
+  </h1>
+
+  <div class="list-group-item">
+    <h4 class="list-group-item-heading">
+      {{ product.name }}
+
+      <span class="label label-default">${{ product.price }}</span>
+    </h4>
+
+    <p class="list-group-item-text">{{ product.description }}</p>
+  </div>
+</div>
+
+
