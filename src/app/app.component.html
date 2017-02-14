@@ -3,19 +3,9 @@
     {{title}}
   </h1>
 
-  <h2>Promoted items</h2>
-  <div class="list-group">
-    <div class="list-group-item" *ngFor="let product of promotedProducts">
-      <product [product]="product"></product>
-    </div>
-  </div>
 
-  <h2>Regular items</h2>
-  <div class="list-group">
-    <div class="list-group-item" *ngFor="let product of regularProducts">
-      <product [product]="product"></product>
-    </div>
-  </div>
+  <product-list [products]="promotedProducts" [header]="'Promoted products'"></product-list>
+  <product-list [products]="regularProducts"></product-list>
 
 </div>
 
