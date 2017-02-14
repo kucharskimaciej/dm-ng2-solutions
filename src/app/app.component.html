@@ -3,15 +3,18 @@
     {{title}}
   </h1>
 
-  <div class="list-group-item">
-    <h4 class="list-group-item-heading">
-      {{ product.name }}
+  <div class="list-group">
+    <div class="list-group-item" *ngFor="let product of products">
+      <h4 class="list-group-item-heading">
+        {{ product.name }}
 
-      <span class="label label-default">${{ product.price }}</span>
-    </h4>
+        <span class="label label-default">${{ product.price }}</span>
+      </h4>
 
-    <p class="list-group-item-text">{{ product.description }}</p>
+      <p class="list-group-item-text">{{ product.description }}</p>
+    </div>
   </div>
+
 </div>
 
 
