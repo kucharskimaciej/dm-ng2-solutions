@@ -5,3 +5,8 @@
 </h4>
 
 <p class="list-group-item-text">{{ product.description }}</p>
+<div *ngIf="product.tags">
+  <span class="label label-primary" *ngFor="let tag of product.tags">
+    {{ tag }}
+  </span>
+</div>
