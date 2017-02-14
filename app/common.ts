@@ -11,6 +11,7 @@ export function createElement(node: CustomElement): HTMLElement | Text {
 
     const el = document.createElement(node.tagName);
     node.children
+        .filter(Boolean)
         .map(createElement)
         .forEach(child => el.appendChild(child));
 

@@ -1,6 +1,6 @@
 import {IProduct} from "./models/product";
 import {AppComponent} from "./components/app.component";
-import {createElement} from "./common";
+import {createElement, el} from "./common";
 
 const products: IProduct[] = [
     {
@@ -22,4 +22,18 @@ const products: IProduct[] = [
 ];
 
 const app = new AppComponent(products);
-document.body.appendChild(createElement(app.render()));
+
+const toggleButton = createElement(el('button', 'Toggle promoted'));
+let appRoot = createElement(app.render());
+
+document.body.appendChild(toggleButton);
+document.body.appendChild(appRoot);
+
+document.querySelector('button').addEventListener('click', function () {
+    document.body.removeChild(appRoot);
+
+    app.togglePromoted();
+    appRoot = createElement(app.render());
+    document.body.appendChild(appRoot);
+});
+
