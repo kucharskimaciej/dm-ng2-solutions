@@ -33,7 +33,10 @@ export class AppComponent {
   public products: IProduct[] = this.allProducts;
 
   onFilter(predicate) {
-    this.products = this.allProducts.filter(product => getValues(product).some(value => String(value).includes(predicate)));
+    this.products = this.allProducts.filter(product => {
+      const values = getValues(product);
+      return values.some(value => String(value).includes(predicate))
+    });
   }
 }
 
