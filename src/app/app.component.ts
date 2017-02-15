@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import {IProduct} from "./models/product";
-
-// npm install --save lodash
-// npm install --save-dev @types/lodash
-import * as _ from 'lodash';
 import {ISort} from "./models/sort";
 
 @Component({
@@ -35,36 +31,22 @@ export class AppComponent {
     }
   ];
 
-  public products: IProduct[] = this.allProducts;
+  public products: IProduct[] = this.allProducts.slice();
   public sort: ISort = {
     property: 'price',
     reverse: false
   };
   public predicate: string = "";
 
-  constructor() {
-    this.onFilter();
-  }
-
   onFilter(predicate: string = ''): void {
     this.predicate = predicate;
   }
 
   onSort(sortBy: string) {
-    this.sort.reverse = !this.sort.reverse;
-    this.sort.property = sortBy;
-
-    this.products = this.sortItems(this.products, this.sort);
-  }
-
-  private sortItems(items: IProduct[], sort: ISort): IProduct[] {
-    const sortedItems = _.sortBy(items, sort.property);
-
-    if (sort.reverse) {
-      sortedItems.reverse();
-    }
-
-    return sortedItems;
+    this.sort = {
+      reverse: !this.sort.reverse,
+      property: sortBy
+    };
   }
 }
 

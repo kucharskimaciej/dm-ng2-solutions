@@ -9,6 +9,7 @@ import {ProductListComponent} from "./components/product-list/product-list.compo
 import {SearchComponent} from "./components/search/search.component";
 import {SortButtonComponent} from "./components/sort-button/sort-button.component";
 import {FilterElementsPipe} from "./pipes/filterElements";
+import {SortElementsPipe} from "./pipes/sortElements";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {FilterElementsPipe} from "./pipes/filterElements";
     SearchComponent,
     SortButtonComponent,
 
-    FilterElementsPipe
+    FilterElementsPipe,
+    SortElementsPipe
   ],
   imports: [
     BrowserModule,
