@@ -35,19 +35,23 @@ export class AppComponent {
   ];
 
   public products: IProduct[];
-  public reverseSort:boolean = false;
+  public sort: { by: string, reverse: boolean } = {
+    by: 'price',
+    reverse: false
+  };
 
   constructor() {
     this.onFilter();
   }
 
   onFilter(predicate: string = ''): void {
-    this.products = this.sortItems(this.filterItems(this.allProducts, predicate), this.reverseSort);
+    this.products = this.sortItems(this.filterItems(this.allProducts, predicate), this.sort.by ,this.sort.reverse);
   }
 
-  onSort() {
-    this.reverseSort = !this.reverseSort;
-    this.products = this.sortItems(this.products, this.reverseSort);
+  onSort(sortBy: string) {
+    this.sort.reverse = !this.sort.reverse;
+    this.sort.by = sortBy;
+    this.products = this.sortItems(this.products, this.sort.by, this.sort.reverse);
   }
 
   private filterItems(items: IProduct[], predicate: string): IProduct[] {
@@ -61,8 +65,8 @@ export class AppComponent {
     });
   }
 
-  private sortItems(items: IProduct[], reverse: boolean): IProduct[] {
-    const sortedItems = _.sortBy(items, 'price');
+  private sortItems(items: IProduct[], prop: string, reverse: boolean): IProduct[] {
+    const sortedItems = _.sortBy(items, prop);
 
     if (reverse) {
       sortedItems.reverse();

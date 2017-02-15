@@ -5,8 +5,13 @@
 
   <search (search)="onFilter($event)"></search>
 
-  <button (click)="onSort()" class="btn btn-default">
-    <i class="glyphicon glyphicon-arrow-{{ reverseSort ? 'up' : 'down' }}"></i>
+  <button (click)="onSort('name')" class="btn btn-default">
+    <i class="glyphicon glyphicon-arrow-{{ sort.reverse ? 'up' : 'down' }}" *ngIf="sort.by === 'name'"></i>
+    Name
+  </button>
+
+  <button (click)="onSort('price')" class="btn btn-default">
+    <i class="glyphicon glyphicon-arrow-{{ sort.reverse ? 'up' : 'down' }}" *ngIf="sort.by === 'price'"></i>
     Price
   </button>
 
