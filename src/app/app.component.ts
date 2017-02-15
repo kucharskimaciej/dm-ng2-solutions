@@ -33,8 +33,12 @@ export class AppComponent {
   public products: IProduct[] = this.allProducts;
 
   onFilter(predicate) {
-    this.products = this.allProducts.filter(product => {
-      const values = getValues(product)
+    this.products = this.filterItems(this.allProducts, predicate);
+  }
+
+  private filterItems(items: any[], predicate: string) {
+    return items.filter(item => {
+      const values = getValues(item)
         .map(String)
         .map(val => val.toLowerCase());
 
