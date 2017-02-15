@@ -9,7 +9,7 @@ import {IProduct} from "./models/product";
 export class AppComponent {
   title = 'Hello Angular!';
 
-  private products: IProduct[] = [
+  private allProducts: IProduct[] = [
     {
       name: "JavaScript: The Definitive Guide",
       description: `Since 1996, JavaScript: The Definitive Guide has been the bible for JavaScript programmers—a programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers.`,
@@ -30,6 +30,9 @@ export class AppComponent {
     }
   ];
 
-  promotedProducts: IProduct[] = this.products.filter(p => p.promoted);
-  regularProducts: IProduct[] = this.products.filter(p => !p.promoted);
+  public products: IProduct[] = this.allProducts;
+
+  onFilter(predicate) {
+    this.products = this.allProducts.filter(product => product.name.includes(predicate));
+  }
 }

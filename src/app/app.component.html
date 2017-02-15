@@ -3,10 +3,8 @@
     {{title}}
   </h1>
 
-
-  <product-list [products]="promotedProducts" [header]="'Promoted products'"></product-list>
-  <product-list [products]="regularProducts"></product-list>
-
+  <search (search)="onFilter($event)"></search>
+  <product-list [products]="products"></product-list>
 </div>
 
 
