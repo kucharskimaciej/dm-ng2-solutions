@@ -10,6 +10,7 @@ import {SearchComponent} from "./components/search/search.component";
 import {SortButtonComponent} from "./components/sort-button/sort-button.component";
 import {FilterElementsPipe} from "./pipes/filterElements";
 import {SortElementsPipe} from "./pipes/sortElements";
+import {ProductsService} from "./services/products";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {SortElementsPipe} from "./pipes/sortElements";
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
