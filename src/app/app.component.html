@@ -4,6 +4,9 @@
   </h1>
 
   <search (search)="onFilter($event)"></search>
+
+  <button (click)="onSort()" class="btn btn-default">Price</button>
+
   <product-list [products]="products"></product-list>
 </div>
 

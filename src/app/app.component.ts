@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import {IProduct} from "./models/product";
 
+// npm install --save lodash
+// npm install --save-dev @types/lodash
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,13 +34,23 @@ export class AppComponent {
     }
   ];
 
-  public products: IProduct[] = this.allProducts;
+  public products: IProduct[];
+  public reverseSort:boolean = false;
 
-  onFilter(predicate) {
-    this.products = this.filterItems(this.allProducts, predicate);
+  constructor() {
+    this.onFilter();
   }
 
-  private filterItems(items: any[], predicate: string) {
+  onFilter(predicate: string = ''): void {
+    this.products = this.sortItems(this.filterItems(this.allProducts, predicate), this.reverseSort);
+  }
+
+  onSort() {
+    this.reverseSort = !this.reverseSort;
+    this.products = this.sortItems(this.products, this.reverseSort);
+  }
+
+  private filterItems(items: IProduct[], predicate: string): IProduct[] {
     return items.filter(item => {
       const values = getValues(item)
         .map(String)
@@ -45,6 +59,16 @@ export class AppComponent {
 
       return values.some(value => value.includes(predicate.toLowerCase()));
     });
+  }
+
+  private sortItems(items: IProduct[], reverse: boolean): IProduct[] {
+    const sortedItems = _.sortBy(items, 'price');
+
+    if (reverse) {
+      sortedItems.reverse();
+    }
+
+    return sortedItems;
   }
 }
 
