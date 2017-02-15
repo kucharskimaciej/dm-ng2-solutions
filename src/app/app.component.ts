@@ -34,8 +34,12 @@ export class AppComponent {
 
   onFilter(predicate) {
     this.products = this.allProducts.filter(product => {
-      const values = getValues(product);
-      return values.some(value => String(value).includes(predicate))
+      const values = getValues(product)
+        .map(String)
+        .map(val => val.toLowerCase());
+
+
+      return values.some(value => value.includes(predicate.toLowerCase()));
     });
   }
 }
