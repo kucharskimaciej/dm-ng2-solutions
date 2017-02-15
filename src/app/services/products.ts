@@ -1,10 +1,17 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OpaqueToken} from '@angular/core';
 import {IProduct} from "../models/product";
+import {Observable, BehaviorSubject} from "rxjs";
+import {Http} from "@angular/http";
+
+import "rxjs/add/operator/map";
+
+export interface IProductsService {
+  getProducts(): Observable<IProduct[]>;
+}
 
 @Injectable()
-export class ProductsService {
-
-  private products: IProduct[] = [
+export class ProductsInMemoryService implements IProductsService {
+  private products: Observable<IProduct[]> = new BehaviorSubject([
     {
       name: "JavaScript: The Definitive Guide",
       description: `Since 1996, JavaScript: The Definitive Guide has been the bible for JavaScript programmers—a programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers.`,
@@ -23,10 +30,20 @@ export class ProductsService {
       promoted: true,
       tags: ['javascript', 'truth']
     }
-  ];
+  ]);
 
   getProducts() {
-    return this.products.slice();
+    return this.products;
   }
-
 }
+
+@Injectable()
+export class ProductsJSONService implements IProductsService {
+  constructor(private http: Http) {}
+
+  getProducts() {
+    return this.http.get('products.json').map(response => response.json());
+  }
+}
+
+export const ProductsServiceToken = new OpaqueToken('ProductsService');

@@ -10,7 +10,7 @@ import {SearchComponent} from "./components/search/search.component";
 import {SortButtonComponent} from "./components/sort-button/sort-button.component";
 import {FilterElementsPipe} from "./pipes/filterElements";
 import {SortElementsPipe} from "./pipes/sortElements";
-import {ProductsService} from "./services/products";
+import {ProductsServiceToken, ProductsJSONService} from "./services/products";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,10 @@ import {ProductsService} from "./services/products";
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [ProductsService],
+  providers: [{
+    provide: ProductsServiceToken,
+    useClass: ProductsJSONService
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

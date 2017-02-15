@@ -5,6 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterElementsPipe implements PipeTransform {
     transform(items: any[], predicate: string): any[] {
+      if (!items) {
+        return [];
+      }
+
       return items.filter(item => {
         const values = getValues(item)
           .map(String)

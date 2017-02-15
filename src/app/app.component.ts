@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {IProduct} from "./models/product";
 import {ISort} from "./models/sort";
-import {ProductsService} from "./services/products";
+import {ProductsServiceToken, IProductsService} from "./services/products";
 
 @Component({
   selector: 'app-root',
@@ -11,14 +11,19 @@ import {ProductsService} from "./services/products";
 export class AppComponent {
   title = 'Hello Angular!';
 
-  constructor(private _productsService: ProductsService) {}
-
-  public products: IProduct[] = this._productsService.getProducts();
+  public products: IProduct[];
   public sort: ISort = {
     property: 'price',
     reverse: false
   };
   public predicate: string = "";
+
+  constructor(@Inject(ProductsServiceToken) private _productsService: IProductsService) {
+    this._productsService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
+  }
+
 
   onFilter(predicate: string = ''): void {
     this.predicate = predicate;
