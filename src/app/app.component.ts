@@ -4,6 +4,7 @@ import {IProduct} from "./models/product";
 // npm install --save lodash
 // npm install --save-dev @types/lodash
 import * as _ from 'lodash';
+import {ISort} from "./models/sort";
 
 @Component({
   selector: 'app-root',
@@ -35,8 +36,8 @@ export class AppComponent {
   ];
 
   public products: IProduct[];
-  public sort: { by: string, reverse: boolean } = {
-    by: 'price',
+  public sort: ISort = {
+    property: 'price',
     reverse: false
   };
 
@@ -45,13 +46,14 @@ export class AppComponent {
   }
 
   onFilter(predicate: string = ''): void {
-    this.products = this.sortItems(this.filterItems(this.allProducts, predicate), this.sort.by ,this.sort.reverse);
+    this.products = this.sortItems(this.filterItems(this.allProducts, predicate), this.sort);
   }
 
   onSort(sortBy: string) {
     this.sort.reverse = !this.sort.reverse;
-    this.sort.by = sortBy;
-    this.products = this.sortItems(this.products, this.sort.by, this.sort.reverse);
+    this.sort.property = sortBy;
+
+    this.products = this.sortItems(this.products, this.sort);
   }
 
   private filterItems(items: IProduct[], predicate: string): IProduct[] {
@@ -65,10 +67,10 @@ export class AppComponent {
     });
   }
 
-  private sortItems(items: IProduct[], prop: string, reverse: boolean): IProduct[] {
-    const sortedItems = _.sortBy(items, prop);
+  private sortItems(items: IProduct[], sort: ISort): IProduct[] {
+    const sortedItems = _.sortBy(items, sort.property);
 
-    if (reverse) {
+    if (sort.reverse) {
       sortedItems.reverse();
     }
 

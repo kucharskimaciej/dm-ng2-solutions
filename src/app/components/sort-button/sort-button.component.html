@@ -1,0 +1,4 @@
+<button (click)="onClick()" class="btn btn-default">
+  <i class="glyphicon glyphicon-arrow-{{ sort.reverse ? 'up' : 'down' }}" *ngIf="sort.property === property"></i>
+  {{ property }}
+</button>
