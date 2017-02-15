@@ -35,18 +35,19 @@ export class AppComponent {
     }
   ];
 
-  public products: IProduct[];
+  public products: IProduct[] = this.allProducts;
   public sort: ISort = {
     property: 'price',
     reverse: false
   };
+  public predicate: string = "";
 
   constructor() {
     this.onFilter();
   }
 
   onFilter(predicate: string = ''): void {
-    this.products = this.sortItems(this.filterItems(this.allProducts, predicate), this.sort);
+    this.predicate = predicate;
   }
 
   onSort(sortBy: string) {
@@ -54,17 +55,6 @@ export class AppComponent {
     this.sort.property = sortBy;
 
     this.products = this.sortItems(this.products, this.sort);
-  }
-
-  private filterItems(items: IProduct[], predicate: string): IProduct[] {
-    return items.filter(item => {
-      const values = getValues(item)
-        .map(String)
-        .map(val => val.toLowerCase());
-
-
-      return values.some(value => value.includes(predicate.toLowerCase()));
-    });
   }
 
   private sortItems(items: IProduct[], sort: ISort): IProduct[] {
@@ -78,6 +68,3 @@ export class AppComponent {
   }
 }
 
-function getValues(object) {
-  return Object.keys(object).map(key => object[key]);
-}

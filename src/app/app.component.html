@@ -8,7 +8,7 @@
   <sort-button *ngFor="let sortProperty of ['price', 'name']"
                [property]="sortProperty" [sort]="sort" (sortChange)="onSort($event)"></sort-button>
 
-  <product-list [products]="products"></product-list>
+  <product-list [products]="products | filterElements:predicate"></product-list>
 </div>
 
 
