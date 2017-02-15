@@ -4,6 +4,7 @@ import {Observable, BehaviorSubject} from "rxjs";
 import {Http} from "@angular/http";
 
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/retry";
 
 export interface IProductsService {
   getProducts(): Observable<IProduct[]>;
@@ -42,7 +43,9 @@ export class ProductsJSONService implements IProductsService {
   constructor(private http: Http) {}
 
   getProducts() {
-    return this.http.get('products.json').map(response => response.json());
+    return this.http.get('products.json')
+      .retry(5)
+      .map(response => response.json());
   }
 }
 
