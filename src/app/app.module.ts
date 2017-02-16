@@ -11,6 +11,7 @@ import {SortButtonComponent} from "./components/sort-button/sort-button.componen
 import {FilterElementsPipe} from "./pipes/filterElements";
 import {SortElementsPipe} from "./pipes/sortElements";
 import {ProductsServiceToken, ProductsJSONService} from "./services/products";
+import {OrderFormComponent} from "./components/order-form/order-form.component";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ProductsServiceToken, ProductsJSONService} from "./services/products";
     ProductListComponent,
     SearchComponent,
     SortButtonComponent,
+    OrderFormComponent,
 
     FilterElementsPipe,
     SortElementsPipe

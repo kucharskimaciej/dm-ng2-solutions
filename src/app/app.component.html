@@ -3,6 +3,8 @@
     {{title}}
   </h1>
 
+  <order-form (data)="onData($event)"></order-form>
+
   <search (search)="onFilter($event)"></search>
 
   <sort-button *ngFor="let sortProperty of ['price', 'name']"

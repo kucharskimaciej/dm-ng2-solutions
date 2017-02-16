@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {IProduct} from "./models/product";
 import {ISort} from "./models/sort";
 import {ProductsServiceToken, IProductsService} from "./services/products";
+import {IOrder} from "./models/order";
 
 @Component({
   selector: 'app-root',
@@ -34,6 +35,10 @@ export class AppComponent {
       reverse: !this.sort.reverse,
       property: sortBy
     };
+  }
+
+  onData(order: IOrder) {
+    console.log(order);
   }
 }
 
