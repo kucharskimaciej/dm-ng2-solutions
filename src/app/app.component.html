@@ -1,7 +1,7 @@
 <div class="container">
   <ul class="nav nav-pills">
-    <li role="presentation"><a routerLink="">Products</a></li>
-    <li role="presentation"><a routerLink="order">Order</a></li>
+    <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="">Products</a></li>
+    <li role="presentation" routerLinkActive="active"><a routerLink="order">Order</a></li>
   </ul>
 
   <router-outlet></router-outlet>
