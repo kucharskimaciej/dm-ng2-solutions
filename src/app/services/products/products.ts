@@ -1,5 +1,5 @@
 import {Injectable, OpaqueToken} from '@angular/core';
-import {IProduct} from "../models/product";
+import {IProduct} from "../../models/product";
 import {Observable} from "rxjs";
 import {Http} from "@angular/http";
 
