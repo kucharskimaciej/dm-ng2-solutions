@@ -16,12 +16,14 @@ import {OrderFormComponent} from "./components/order-form/order-form.component";
 import appRoutes from './app.routes';
 import {OrderComponent} from "./containers/order/order.component";
 import {ProductsComponent} from "./containers/products/products.component";
+import {SingleProductComponent} from "./containers/single-product/single-product.component";
 
 @NgModule({
   declarations: [
     AppComponent,
 
     ProductsComponent,
+    SingleProductComponent,
     OrderComponent,
 
     ProductComponent,
