@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {IOrder} from "../../models/order";
-import {FormGroup, FormBuilder} from "@angular/forms";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 
 @Component({
     moduleId: module.id,
@@ -13,12 +13,12 @@ export class OrderFormComponent {
     form: FormGroup;
     constructor(fb: FormBuilder) {
       this.form = fb.group({
-        name: '',
-        surname: '',
-        address: '',
-        email: '',
-        productName: '',
-        productCount: 0
+        name: ['', Validators.required],
+        surname: ['', Validators.required],
+        address: ['', Validators.required],
+        email: ['', Validators.required],
+        productName: ['', Validators.required],
+        productCount: [0, Validators.required]
       });
     }
 
