@@ -1,6 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {IOrder} from "../../models/order";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {NaturalNumberValidator} from "../../validators/naturalNumber";
 
 @Component({
     moduleId: module.id,
@@ -18,7 +19,7 @@ export class OrderFormComponent {
         address: ['', Validators.required],
         email: ['', Validators.required],
         productName: ['', Validators.required],
-        productCount: [0, Validators.required]
+        productCount: [1, [Validators.required, NaturalNumberValidator]]
       });
     }
 
