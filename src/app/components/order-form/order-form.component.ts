@@ -2,6 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {IOrder} from "../../models/order";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NaturalNumberValidator} from "../../validators/naturalNumber";
+import {EmailValidator} from "../../validators/email";
 
 @Component({
     moduleId: module.id,
@@ -17,7 +18,7 @@ export class OrderFormComponent {
         name: ['', Validators.required],
         surname: ['', Validators.required],
         address: ['', Validators.required],
-        email: ['', Validators.required],
+        email: ['', [Validators.required, EmailValidator]],
         productName: ['', Validators.required],
         productCount: [1, [Validators.required, NaturalNumberValidator]]
       });
