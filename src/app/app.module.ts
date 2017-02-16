@@ -13,9 +13,16 @@ import {SortElementsPipe} from "./pipes/sortElements";
 import {ProductsServiceToken, ProductsJSONService} from "./services/products";
 import {OrderFormComponent} from "./components/order-form/order-form.component";
 
+import appRoutes from './app.routes';
+import {OrderComponent} from "./containers/order/order.component";
+import {ProductsComponent} from "./containers/products/products.component";
+
 @NgModule({
   declarations: [
     AppComponent,
+
+    ProductsComponent,
+    OrderComponent,
 
     ProductComponent,
     ProductListComponent,
@@ -30,7 +37,9 @@ import {OrderFormComponent} from "./components/order-form/order-form.component";
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+
+    appRoutes
   ],
   providers: [{
     provide: ProductsServiceToken,

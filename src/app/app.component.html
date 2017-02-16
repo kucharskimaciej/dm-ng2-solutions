@@ -1,16 +1,5 @@
 <div class="container">
-  <h1>
-    {{title}}
-  </h1>
-
-  <order-form (data)="onData($event)"></order-form>
-
-  <search (search)="onFilter($event)"></search>
-
-  <sort-button *ngFor="let sortProperty of ['price', 'name']"
-               [property]="sortProperty" [sort]="sort" (sortChange)="onSort($event)"></sort-button>
-
-  <product-list [products]="products | filterElements:predicate | sortElements:sort"></product-list>
+  <router-outlet></router-outlet>
 </div>
 
 

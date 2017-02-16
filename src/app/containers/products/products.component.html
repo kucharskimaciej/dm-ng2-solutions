@@ -1,0 +1,9 @@
+<h1>Products</h1>
+
+<search (search)="onFilter($event)"></search>
+
+<sort-button *ngFor="let sortProperty of ['price', 'name']"
+             [property]="sortProperty" [sort]="sort" (sortChange)="onSort($event)"></sort-button>
+
+<product-list [products]="products | filterElements:predicate | sortElements:sort"></product-list>
+
