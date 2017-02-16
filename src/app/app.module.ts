@@ -17,6 +17,7 @@ import appRoutes from './app.routes';
 import {OrderComponent} from "./containers/order/order.component";
 import {ProductsComponent} from "./containers/products/products.component";
 import {SingleProductComponent} from "./containers/single-product/single-product.component";
+import {PromotedProductDirective} from "./directives/promoted";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import {SingleProductComponent} from "./containers/single-product/single-product
     OrderFormComponent,
 
     FilterElementsPipe,
-    SortElementsPipe
+    SortElementsPipe,
+
+    PromotedProductDirective
   ],
   imports: [
     BrowserModule,
